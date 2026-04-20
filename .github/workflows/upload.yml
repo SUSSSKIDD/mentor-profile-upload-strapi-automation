@@ -20,14 +20,12 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
-          cache-dependency-path: 'mentor profile/package.json'
+          cache-dependency-path: 'package.json'
 
       - name: Install Dependencies
-        working-directory: './mentor profile'
         run: npm install
 
       - name: Run Upload Script
-        working-directory: './mentor profile'
         env:
           STRAPI_URL: ${{ secrets.STRAPI_URL }}
           STRAPI_JWT: ${{ secrets.STRAPI_JWT }}
