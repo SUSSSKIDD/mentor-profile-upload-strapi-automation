@@ -46,11 +46,10 @@ function toNum(val) {
 function toRichText(text) {
     if (!text?.trim()) return undefined;
     const lines = text.trim().split('\n').filter(Boolean);
-    const blocks = lines.map(line => ({
+    return lines.map(line => ({
         type: 'paragraph',
         children: [{ type: 'text', text: line.trim() }]
     }));
-    return JSON.stringify(blocks);
 }
 
 function formatAboutSection(row) {
