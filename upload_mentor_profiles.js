@@ -337,7 +337,11 @@ async function run() {
     }
 
     console.log('\n' + '─'.repeat(65));
-    console.log('✅ SYNC COMPLETE');
+    if (stats.created === 0 && stats.updated === 0 && stats.failed === 0) {
+        console.log('✅ SYNC COMPLETE — NO CHANGES NEEDED. All rows are already up to date.');
+    } else {
+        console.log('✅ SYNC COMPLETE');
+    }
     console.log(`   ✨ Created  : ${stats.created}`);
     console.log(`   🔄 Updated  : ${stats.updated}`);
     console.log(`   ⏭️  Unchanged: ${stats.unchanged}`);
