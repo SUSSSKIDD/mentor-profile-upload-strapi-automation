@@ -1,0 +1,35 @@
+name: Strapi Mentor Profile Upload
+
+on:
+  # Allows triggering from cronjob.org or other tools via API
+  repository_dispatch:
+    types: [trigger_upload]
+  # Allows manual triggering from GitHub UI
+  workflow_dispatch:
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: 'mentor profile/package.json'
+
+      - name: Install Dependencies
+        working-directory: './mentor profile'
+        run: npm install
+
+      - name: Run Upload Script
+        working-directory: './mentor profile'
+        env:
+          STRAPI_URL: ${{ secrets.STRAPI_URL }}
+          STRAPI_JWT: ${{ secrets.STRAPI_JWT }}
+          CSV_SOURCE: ${{ secrets.CSV_SOURCE }}
+        run: node upload_mentor_profiles.js
