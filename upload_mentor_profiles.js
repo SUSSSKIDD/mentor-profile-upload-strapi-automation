@@ -45,11 +45,7 @@ function toNum(val) {
 
 function toRichText(text) {
     if (!text?.trim()) return undefined;
-    const lines = text.trim().split('\n').filter(Boolean);
-    return lines.map(line => ({
-        type: 'paragraph',
-        children: [{ type: 'text', text: line.trim() }]
-    }));
+    return text.trim();
 }
 
 function formatAboutSection(row) {
@@ -88,7 +84,7 @@ function buildPayload(row) {
         showTestimonials: isTrue(row.Show_testimonials),
         showSessionHighlights: isTrue(row.Show_session_highlights),
         interestedEmails: row.InterestedEmails?.trim()
-            ? `{${row.InterestedEmails.split(',').map(e => `"${e.trim()}"`).join(',')}}`
+            ? row.InterestedEmails.split(',').map(e => e.trim()).filter(Boolean)
             : undefined,
         is_ready_for_paid_sessions: isTrue(row['Is_ready_for_paid_sessions.']),
         session_price: toNum(row.Session_price),
