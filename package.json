@@ -1,0 +1,13 @@
+{
+  "name": "strapi-mentor-upload",
+  "version": "1.0.0",
+  "description": "Automated Strapi mentor profile uploader",
+  "main": "upload_mentor_profiles.js",
+  "scripts": {
+    "start": "node upload_mentor_profiles.js"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "csv-parser": "^3.0.0"
+  }
+}
